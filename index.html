@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ambercap Audio</title>
 <meta name="description" content="Game audio, sound design, chiptune and DIY electronics by Chris Lucas (oGnomo).">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
@@ -16,18 +20,38 @@ body{margin:0;background:#0a0603}
 a:focus-visible,button:focus-visible{outline:2px solid #ffc266;outline-offset:3px}
 .nav-a:hover,.btn:hover{background:#ff9a1f;color:#0a0603;text-shadow:none}
 .row-a:hover{color:#ffc266}
-/* Photo carousel (DIY projects) */
+h2{color:#ff9a1f}
+/* Photo carousel (DIY projects, Projects) */
 .gal{position:relative;box-sizing:border-box;height:230px;margin-bottom:16px;border:2px solid #6b4210;background:repeating-linear-gradient(45deg,#1a0f04 0px,#1a0f04 8px,#120a03 8px,#120a03 16px);overflow:hidden}
 .gal-track{display:flex;height:100%;margin:0;padding:0;list-style:none;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .gal-track::-webkit-scrollbar{display:none}
 .gal-track li{position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start}
 .gal-track img{display:block;width:100%;height:100%;object-fit:cover}
-.gal-ph{display:flex;align-items:center;justify-content:center;height:100%;color:#cc7a1c;font-size:26px}
+.gal-ph{display:flex;align-items:center;justify-content:center;height:100%;color:#a8661a;font-size:26px}
 .gal-btn{position:absolute;top:50%;margin-top:-22px;width:44px;height:44px;padding:0;border:2px solid #ff9a1f;background:rgba(10,6,3,0.82);color:#ff9a1f;font:inherit;font-size:30px;line-height:1;text-shadow:inherit;cursor:pointer;z-index:2}
 .gal-btn.prev{left:8px}
 .gal-btn.next{right:8px}
 .gal-btn:hover{background:#ff9a1f;color:#0a0603;text-shadow:none}
-.gal-count{position:absolute;right:8px;bottom:8px;padding:0 10px;border:1px solid #6b4210;background:rgba(10,6,3,0.82);font-size:22px;letter-spacing:1px;z-index:2}
+.gal-count{color:#ff9a1f;position:absolute;right:8px;bottom:8px;padding:0 10px;border:1px solid #6b4210;background:rgba(10,6,3,0.82);font-size:22px;letter-spacing:1px;z-index:2}
+.gal-yt{position:relative;display:block;width:100%;height:100%;padding:0;border:0;background:#120a03;color:#ff9a1f;font:inherit;cursor:pointer;overflow:hidden}
+.gal-yt img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:.85}
+.gal-yt:hover img{opacity:1}
+.gal-yt .play{position:absolute;top:50%;left:50%;width:84px;height:56px;margin:-28px 0 0 -42px;display:flex;align-items:center;justify-content:center;border:2px solid #ff9a1f;background:rgba(10,6,3,0.82);font-size:30px;line-height:1;text-shadow:inherit}
+.gal-yt:hover .play{background:#ff9a1f;color:#0a0603;text-shadow:none}
+.gal-yt:focus-visible{outline:2px solid #ffc266;outline-offset:-4px}
+.gal-track iframe{display:block;width:100%;height:100%;border:0}
+.gal-track img{cursor:zoom-in}
+.lb{position:fixed;top:0;right:0;bottom:0;left:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:56px 16px 48px;box-sizing:border-box;background:rgba(10,6,3,0.96)}
+.lb[hidden]{display:none}
+.lb img{display:block;max-width:100%;max-height:100%;object-fit:contain;border:2px solid #6b4210;background:#100803;cursor:zoom-out}
+.lb-btn{position:absolute;display:flex;align-items:center;justify-content:center;min-width:48px;height:48px;padding:0 12px;border:2px solid #ff9a1f;background:rgba(10,6,3,0.9);color:#ff9a1f;font:inherit;font-size:30px;line-height:1;text-shadow:inherit;cursor:pointer}
+.lb-btn:hover{background:#ff9a1f;color:#0a0603;text-shadow:none}
+.lb-btn:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
+.lb-close{top:8px;right:8px}
+.lb-prev{left:8px;top:50%;margin-top:-24px}
+.lb-next{right:8px;top:50%;margin-top:-24px}
+.lb-cap{position:absolute;left:16px;right:16px;bottom:10px;text-align:center;color:#a8661a;font-size:22px;letter-spacing:1px}
+.gal-track video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
 
 /* CRT overlay (fixed to the viewport) */
 .crt{position:fixed;top:0;right:0;bottom:0;left:0;pointer-events:none;z-index:50;background:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0px,rgba(0,0,0,0) 2px,rgba(0,0,0,0.26) 3px,rgba(0,0,0,0.26) 4px),radial-gradient(ellipse at center,rgba(0,0,0,0) 60%,rgba(0,0,0,0.5) 100%)}
@@ -41,14 +65,14 @@ a:focus-visible,button:focus-visible{outline:2px solid #ffc266;outline-offset:3p
 .np{display:flex;flex-wrap:wrap;gap:28px;padding:24px;border-bottom:2px solid #6b4210}
 .cover{position:relative;box-sizing:border-box;flex:0 1 300px;width:300px;max-width:100%;aspect-ratio:1/1;border:2px solid #6b4210;background:repeating-linear-gradient(45deg,#1a0f04 0px,#1a0f04 8px,#120a03 8px,#120a03 16px);overflow:hidden}
 .cover img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block}
-.cover .ph{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;color:#cc7a1c;font-size:28px}
+.cover .ph{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;color:#a8661a;font-size:28px}
 #ytWrap{position:absolute;top:0;right:0;bottom:0;left:0}
 #ytWrap iframe{width:100%;height:100%;border:0;display:block}
 .is-yt .cover{flex-basis:480px;width:480px;aspect-ratio:16/9}
 .np-main{flex:1 1 320px;min-width:0}
-.lbl{margin:0 0 4px;color:#cc7a1c;font-size:22px;letter-spacing:1px}
+.lbl{margin:0 0 4px;color:#a8661a;font-size:22px;letter-spacing:1px}
 #npTitle{margin:0 0 4px;font-weight:400;font-size:48px;line-height:1;color:#ffc266;letter-spacing:1px}
-.tags{margin:0;min-height:1.25em;color:#cc7a1c}
+.tags{margin:0;min-height:1.25em;color:#a8661a}
 .ctl{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 14px}
 .btn2{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;min-width:96px;padding:6px 18px;border:2px solid #ff9a1f;background:transparent;color:#ff9a1f;font:inherit;font-size:26px;letter-spacing:1px;text-shadow:inherit;cursor:pointer}
 .btn2:hover{background:#ff9a1f;color:#0a0603;text-shadow:none}
@@ -57,9 +81,9 @@ a:focus-visible,button:focus-visible{outline:2px solid #ffc266;outline-offset:3p
 .seekrow,.volrow{display:flex;align-items:center;gap:12px}
 .seekrow span{flex:0 0 52px;text-align:center}
 .volrow{max-width:340px;margin-top:4px}
-.volrow label{flex:0 0 52px;text-align:center;color:#cc7a1c}
+.volrow label{flex:0 0 52px;text-align:center;color:#a8661a}
 .is-yt .seekrow,.is-yt .volrow,.is-yt #btnPlay{display:none}
-#status{margin:14px 0 0;color:#cc7a1c;font-size:22px;letter-spacing:1px}
+#status{margin:14px 0 0;color:#a8661a;font-size:22px;letter-spacing:1px}
 input[type=range]{-webkit-appearance:none;appearance:none;flex:1 1 auto;min-width:0;width:100%;height:28px;margin:0;background:transparent;cursor:pointer}
 input[type=range]::-webkit-slider-runnable-track{height:12px;background:#1a0f04;border:2px solid #6b4210}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:24px;margin-top:-8px;background:#ff9a1f;border:none;border-radius:0}
@@ -70,10 +94,10 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
 .tracks li:last-child .trk{border-bottom:none}
 .trk{display:flex;align-items:center;gap:16px;flex-wrap:wrap;width:100%;box-sizing:border-box;min-height:52px;padding:8px 24px;background:transparent;border:none;border-bottom:1px dashed #6b4210;color:#ff9a1f;font:inherit;text-align:left;text-shadow:inherit;cursor:pointer}
 .trk:hover{background:#1a0f04}
-.trk .n{flex:0 0 40px;color:#cc7a1c}
+.trk .n{flex:0 0 40px;color:#a8661a}
 .trk .t{flex:1 1 220px;font-size:28px;color:#ffc266}
-.trk .g{flex:0 1 240px;color:#cc7a1c}
-.trk .k{flex:0 0 90px;color:#cc7a1c;text-align:right}
+.trk .g{flex:0 1 240px;color:#a8661a}
+.trk .k{flex:0 0 90px;color:#a8661a;text-align:right}
 .trk.on{background:#ff9a1f;color:#0a0603;text-shadow:none}
 .trk.on .n,.trk.on .t,.trk.on .g,.trk.on .k{color:#0a0603}
 @media (max-width:640px){
@@ -95,18 +119,18 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
 <div class="crt" aria-hidden="true"></div>
 <div class="crt-bar" aria-hidden="true"></div>
 
-<div id="top" style="position: relative; box-sizing: border-box; background: #0a0603; color: #ff9a1f; font-family: 'VT323', monospace; font-size: 24px; line-height: 1.25; text-shadow: 0 0 6px rgba(255,154,31,0.45)">
+<div id="top" style="position: relative; box-sizing: border-box; background: #0a0603; color: #e08a20; font-family: 'VT323', monospace; font-size: 24px; line-height: 1.25; text-shadow: 0 0 6px rgba(255,154,31,0.45)">
 <div style="position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; padding: 0 24px 40px; box-sizing: border-box">
 
 <!-- HEADER / NAV -->
 <header style="padding-top: 28px">
 <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid #6b4210">
-<a href="#top" style="display: inline-flex; align-items: center; min-height: 44px; padding-bottom: 6px; font-size: 32px; letter-spacing: 3px; color: #ffc266; text-decoration: none"><img src="logo.png" alt="" style="display: block; width: 48px; height: 48px; margin-right: 12px">AMBERCAP AUDIO</a>
 <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 6px">
 <a class="nav-a" href="#about" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 44px; padding: 8px 16px; border: 2px solid #ff9a1f; border-bottom: none; background: #ff9a1f; color: #0a0603; text-shadow: none; text-decoration: none; letter-spacing: 1px">ABOUT</a>
 <a class="nav-a" href="#game-audio" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 44px; padding: 8px 16px; border: 2px solid #6b4210; border-bottom: none; color: #ff9a1f; text-decoration: none; letter-spacing: 1px">GAME AUDIO</a>
-<a class="nav-a" href="#diy" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 44px; padding: 8px 16px; border: 2px solid #6b4210; border-bottom: none; color: #ff9a1f; text-decoration: none; letter-spacing: 1px">DIY</a>
 <a class="nav-a" href="#music" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 44px; padding: 8px 16px; border: 2px solid #6b4210; border-bottom: none; color: #ff9a1f; text-decoration: none; letter-spacing: 1px">MUSIC</a>
+<a class="nav-a" href="#diy" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 44px; padding: 8px 16px; border: 2px solid #6b4210; border-bottom: none; color: #ff9a1f; text-decoration: none; letter-spacing: 1px">DIY</a>
+<a class="nav-a" href="#projects" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 44px; padding: 8px 16px; border: 2px solid #6b4210; border-bottom: none; color: #ff9a1f; text-decoration: none; letter-spacing: 1px">PROJECTS</a>
 <a class="nav-a" href="#contact" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 44px; padding: 8px 16px; border: 2px solid #6b4210; border-bottom: none; color: #ff9a1f; text-decoration: none; letter-spacing: 1px">CONTACT / RATES</a>
 </nav>
 </div>
@@ -114,35 +138,35 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
 
 <!-- 01 ABOUT -->
 <section id="about" style="padding: 56px 0 24px">
-<p style="margin: 0 0 6px; color: #cc7a1c; font-size: 22px; letter-spacing: 1px">TERMINAL v1.0 // SESSION OPEN</p>
-<p style="margin: 0 0 24px; color: #cc7a1c; font-size: 22px; letter-spacing: 1px">&gt; whoami</p>
+<p style="margin: 0 0 6px; color: #a8661a; font-size: 22px; letter-spacing: 1px">TERMINAL v1.0 // SESSION OPEN</p>
+<p style="margin: 0 0 24px; color: #a8661a; font-size: 22px; letter-spacing: 1px">&gt; about</p>
 <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 32px">
 <img src="logo.png" alt="Ambercap Audio gnome logo" style="display: block; flex: 0 0 auto; width: clamp(96px, 16vw, 200px); height: auto">
 <h1 style="margin: 0; font-weight: 400; font-size: clamp(52px, 10vw, 128px); line-height: 0.9; letter-spacing: 3px; color: #ffc266">AMBERCAP<br>AUDIO</h1>
 </div>
-<p style="margin: 24px 0 0; font-size: 30px; letter-spacing: 1px">game audio / sound design / chiptune / diy electronics<span aria-hidden="true" style="display: inline-block; width: 14px; height: 26px; background: #ff9a1f; margin-left: 10px; vertical-align: -4px; animation: amberblink 1s steps(1) infinite"></span></p>
+<p style="margin: 24px 0 0; color: #ff9a1f; font-size: 30px; letter-spacing: 1px">game audio / sound design / chiptune / diy electronics<span aria-hidden="true" style="display: inline-block; width: 14px; height: 26px; background: #ff9a1f; margin-left: 10px; vertical-align: -4px; animation: amberblink 1s steps(1) infinite"></span></p>
 
 <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 56px">
 <div style="flex: 0 1 320px; min-width: 240px">
+<p style="margin: 0 0 8px; color: #a8661a; font-size: 20px; letter-spacing: 1px">ID: OGNOMO // CHRIS LUCAS</p>
 <img src="photos/mugshot.jpg" alt="mugshot" style="display:block; width:100%; height:380px; object-fit:cover; border:2px solid #6b4210">
-<p style="margin: 8px 0 0; color: #cc7a1c; font-size: 20px; letter-spacing: 1px">ID: OGNOMO // CHRIS LUCAS</p>
 </div>
 
 <div style="flex: 1 1 440px; min-width: 0">
 <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid #6b4210; padding-bottom: 8px; margin-bottom: 20px">
-<span style="font-size: 28px; color: #cc7a1c">[ 01 ]</span>
+<span style="font-size: 28px; color: #a8661a">[ 01 ]</span>
 <h2 style="margin: 0; font-weight: 400; font-size: 56px; letter-spacing: 2px; line-height: 1">WHO AM I</h2>
 </div>
-<p style="margin: 0 0 14px; font-size: 27px; line-height: 1.3">I’m Chris Lucas, also known as oGnomo or Ulterior Silence. I compose, record and design sound for games: from authentic chiptune made with old-school trackers to modern production.</p>
-<p style="margin: 0 0 14px; font-size: 27px; line-height: 1.3">Retro styles are where I’m most at home, and I love working within the limits of old hardware, where every channel counts. That approach carries into my modern music too, which is contemporary in sound but always inspired by the retro games I grew up with. </p>
-<p style="margin: 0 0 24px; font-size: 27px; line-height: 1.3">I trained as a composer and studio audio producer, and I build my own gear, from fuzz pedals to piezo boxes and many others. I’m currently building unique sound packs recorded from scratch with my piezo box/guitar hybrid (featured in Projects), running those raw sounds through my pedalboard and tape machine. Stay tuned if you’re interested.</p>
+<p style="margin: 0 0 14px; font-size: 27px; line-height: 1.3">I’m Chris Lucas, also known as oGnomo or Ulterior Silence. With around 10 years of experience as a professional musician and 2 years working in game audio, I compose, record, and design sound for games, from authentic chiptune made with old-school trackers to modern music production.</p>
+<p style="margin: 0 0 14px; font-size: 27px; line-height: 1.3">Retro inspired styles are where I’m most at home, and I love working within the limits of old hardware. That approach carries into all of my music too, which is contemporary in technique but always inspired by the retro games I grew up with. </p>
+<p style="margin: 0 0 24px; font-size: 27px; line-height: 1.3">I trained as a composer, guitarist, and producer, and I’m passionate about tinkering with gear, whether it’s building electronics and instruments from scratch or modding and fixing flea market finds.</p>
 
 <div style="border: 2px solid #6b4210; padding: 12px 20px; background: #100803">
-<div style="display: flex; gap: 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 150px; color: #cc7a1c">NAME</span><span style="flex: 1 1 240px">Chris Lucas, aka oGnomo</span></div>
-<div style="display: flex; gap: 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 150px; color: #cc7a1c">FIELD</span><span style="flex: 1 1 240px">Game audio, composition, DIY</span></div>
-<div style="display: flex; gap: 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 150px; color: #cc7a1c">TRAINING</span><span style="flex: 1 1 240px">B.A. in Music Composition (UFPel) <br>Music Education degree (in progress)<br>Studio audio production<br>Classical guitar (technical course)</span></div>
-<div style="display: flex; gap: 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 150px; color: #cc7a1c">LANGUAGES</span><span style="flex: 1 1 240px">Portuguese, English</span></div>
-<div style="display: flex; gap: 16px; flex-wrap: wrap; padding: 6px 0"><span style="flex: 0 0 150px; color: #cc7a1c">TOOLS</span><span style="flex: 1 1 240px">REAPER / Ableton Live / Furnace Tracker / Famitracker / MilkyTracker / hand recorders / TASCAM 424MKII tape machine / various guitar pedals and other instruments</span></div>
+<div style="display: flex; gap: 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 150px; color: #a8661a">NAME</span><span style="flex: 1 1 240px">Chris Lucas, aka oGnomo</span></div>
+<div style="display: flex; gap: 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 150px; color: #a8661a">FIELD</span><span style="flex: 1 1 240px">Game audio, composition, DIY</span></div>
+<div style="display: flex; gap: 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 150px; color: #a8661a">TRAINING</span><span style="flex: 1 1 240px">B.A. in Music Composition (UFPel) <br>Music Education degree (UFPel, in progress)<br>Music production (IGAP-RS)<br>Classical guitar (IFRS, technical course)</span></div>
+<div style="display: flex; gap: 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 150px; color: #a8661a">LANGUAGES</span><span style="flex: 1 1 240px">Portuguese, English</span></div>
+<div style="display: flex; gap: 16px; flex-wrap: wrap; padding: 6px 0"><span style="flex: 0 0 150px; color: #a8661a">TOOLS</span><span style="flex: 1 1 240px">REAPER / Ableton Live / Furnace Tracker / Famitracker / MilkyTracker / hand recorders / TASCAM 424MKII tape machine / various guitar pedals and other instruments</span></div>
 </div>
 </div>
 </div>
@@ -151,10 +175,10 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
 <!-- 02 GAME AUDIO -->
 <section id="game-audio" style="padding: 72px 0 24px">
 <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid #6b4210; padding-bottom: 8px; margin-bottom: 12px">
-<span style="font-size: 28px; color: #cc7a1c">[ 02 ]</span>
+<span style="font-size: 28px; color: #a8661a">[ 02 ]</span>
 <h2 style="margin: 0; font-weight: 400; font-size: 56px; letter-spacing: 2px; line-height: 1">GAME AUDIO</h2>
 </div>
-<p style="margin: 0 0 28px; color: #cc7a1c; font-size: 26px">&gt; ls ./game_audio  // music and sfx for games</p>
+<p style="margin: 0 0 28px; color: #a8661a; font-size: 26px">&gt; ls ./game_audio  // music and sfx for games</p>
 
 <div style="display: flex; flex-wrap: wrap; gap: 20px">
 <div style="flex: 1 1 240px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px">
@@ -177,23 +201,21 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
 
 
 <div style="margin-top: 40px; border: 2px solid #ff9a1f; padding: 24px; background: #100803">
-<p style="margin: 0 0 4px; color: #cc7a1c; font-size: 22px; letter-spacing: 1px">FEATURED RELEASE</p>
-<h3 style="margin: 0 0 20px; font-weight: 400; font-size: 52px; line-height: 1; color: #ffc266; letter-spacing: 2px">LO-FI, LO-FANTASY SFX PACK</h3>
+<p style="margin: 0 0 4px; color: #a8661a; font-size: 22px; letter-spacing: 1px">FEATURED RELEASE</p>
+<h3 style="margin: 0 0 20px; font-weight: 400; font-size: 52px; line-height: 1; color: #ffc266; letter-spacing: 2px">LO-FI, LO-FANTASY SOUND PACK</h3>
 <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
 
-<!-- PACK IMAGE: troque o caminho em src (e o link em href). Formato da capa do itch.io: 630x500 (proporção 63:50), ou maior na mesma proporção, como 1260x1000.
-     Se o arquivo não existir, aparece o quadro [ PACK COVER ]. -->
 <a href="https://ognomo.itch.io/" style="position: relative; display: block; box-sizing: border-box; flex: 0 1 400px; width: 400px; max-width: 100%; aspect-ratio: 630 / 500; border: 2px solid #6b4210; background: repeating-linear-gradient(45deg, #1a0f04 0px, #1a0f04 8px, #120a03 8px, #120a03 16px); overflow: hidden; text-decoration: none">
-<span style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; display: flex; align-items: center; justify-content: center; color: #cc7a1c; font-size: 28px">[ PACK COVER ]</span>
-<img src="images/lofantasy.png" alt="Dungeon SFX pack" onerror="this.style.display='none'" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block">
+<span style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; display: flex; align-items: center; justify-content: center; color: #a8661a; font-size: 28px">[ PACK COVER ]</span>
+<img src="covers/lofantasy.png" alt="Dungeon SFX pack" onerror="this.style.display='none'" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block">
 </a>
 
 <div style="flex: 1 1 320px; min-width: 0">
-<div style="display: flex; gap: 2px 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 130px; color: #cc7a1c">SOURCE</span><span style="flex: 1 1 240px">Sounds made for Warlord's Penance (2nd place, 1-Bit Jam #7)</span></div>
-<div style="display: flex; gap: 2px 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 130px; color: #cc7a1c">CONTENT</span><span style="flex: 1 1 240px">Combat, UI, dungeon exploration</span></div>
-<div style="display: flex; gap: 2px 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 130px; color: #cc7a1c">FORMAT</span><span style="flex: 1 1 240px">WAV and OGG, 48 kHz, 24-bit</span></div>
-<div style="display: flex; gap: 2px 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 130px; color: #cc7a1c">NAMING</span><span style="flex: 1 1 240px">UCS (Universal Category System)</span></div>
-<div style="display: flex; gap: 2px 16px; flex-wrap: wrap; padding: 6px 0"><span style="flex: 0 0 130px; color: #cc7a1c">LICENSE</span><span style="flex: 1 1 240px">CC0 1.0, free for commercial use</span></div>
+<div style="display: flex; gap: 2px 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 130px; color: #a8661a">SOURCE</span><span style="flex: 1 1 240px">Sounds originally made for Warlord's Penance (1-Bit Jam #7 - 2nd place)</span></div>
+<div style="display: flex; gap: 2px 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 130px; color: #a8661a">CONTENT</span><span style="flex: 1 1 240px">Combat, UI, dungeon exploration</span></div>
+<div style="display: flex; gap: 2px 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 130px; color: #a8661a">FORMAT</span><span style="flex: 1 1 240px">WAV and OGG, 48 kHz, 24-bit</span></div>
+<div style="display: flex; gap: 2px 16px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px dotted #6b4210"><span style="flex: 0 0 130px; color: #a8661a">NAMING</span><span style="flex: 1 1 240px">UCS (Universal Category System)</span></div>
+<div style="display: flex; gap: 2px 16px; flex-wrap: wrap; padding: 6px 0"><span style="flex: 0 0 130px; color: #a8661a">LICENSE</span><span style="flex: 1 1 240px">CC0 1.0, free for commercial use</span></div>
 <div style="margin-top: 20px">
 <a class="btn" href="https://ognomo.itch.io/" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 44px; padding: 8px 22px; border: 2px solid #ff9a1f; color: #ff9a1f; text-decoration: none; font-size: 28px; letter-spacing: 1px">GET THE PACK</a>
 </div>
@@ -201,56 +223,16 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
 
 </div>
 </div>
-<p style="margin: 20px 0 0; color: #cc7a1c; font-size: 24px">&gt; more packs: <a class="row-a" href="https://ognomo.itch.io/" style="color: #ff9a1f">[MY ITCH PAGE]</a></p>
+<p style="margin: 20px 0 0; color: #a8661a; font-size: 24px">&gt; more packs: <a class="row-a" href="https://ognomo.itch.io/" style="color: #ff9a1f">[MY ITCH PAGE]</a></p>
 </section>
 
-<!-- 03 DIY -->
-<section id="diy" style="padding: 72px 0 24px">
-<div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid #6b4210; padding-bottom: 8px; margin-bottom: 12px">
-<span style="font-size: 28px; color: #cc7a1c">[ 03 ]</span>
-<h2 style="margin: 0; font-weight: 400; font-size: 56px; letter-spacing: 2px; line-height: 1">DIY PROJECTS</h2>
-</div>
-<p style="margin: 0 0 28px; color: #cc7a1c; font-size: 26px">&gt; ls ./bench  // pedals, preamps and hand-built oddities</p>
-
-<!-- PHOTOS: each card has a <div class="gal" ...>. List the photo paths inside data-photos, separated by commas.
-     No photos: shows the [ PHOTO ] placeholder.   One photo: shows the photo.   Two or more: shows a carousel (buttons, swipe, counter).
-     Example: data-photos="photos/fuzz-1.jpg, photos/fuzz-2.jpg, photos/fuzz-3.jpg"
-     Use file names without commas. data-alt is the description read by screen readers. -->
-<div style="display: flex; flex-wrap: wrap; gap: 20px">
-<div style="flex: 1 1 460px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px">
-<div class="gal" data-alt="Fuzz Face pedal with bias control" data-photos="photos/ng0.jpg, videos/ng.mp4, photos/ng1.jpg, photos/ng2.jpg, photos/ng3.jpg, photos/ng4.jpg, photos/ng5.jpg"></div>
-<h3 style="margin: 0 0 4px; font-weight: 400; font-size: 36px; color: #ffc266; letter-spacing: 1px">NOISE GUITAR</h3>
-<p style="margin: 0 0 8px; color: #cc7a1c; font-size: 22px; letter-spacing: 1px">GUITAR / PIEZO / CUSTOM INSTRUMENT</p>
-<p style="margin: 0; font-size: 24px">A guitar equipped with a piezo box, hand built preamp and an aditional output.</p>
-</div>
-<div style="flex: 1 1 460px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px">
-<div class="gal" data-alt="Piezo mic amplifier" data-photos="photos/pb0.jpg, photos/pb1.jpg, photos/pb2.jpg, photos/pb3.jpg, photos/pb4.jpg, photos/pb5.jpg"></div>
-<h3 style="margin: 0 0 4px; font-weight: 400; font-size: 36px; color: #ffc266; letter-spacing: 1px">PIEZO NOISE BOX #1</h3>
-<p style="margin: 0 0 8px; color: #cc7a1c; font-size: 22px; letter-spacing: 1px">PIEZO / NOISE / SFX </p>
-<p style="margin: 0; font-size: 24px">A piezo box with built-in hipass filter and range selection.</p>
-</div>
-<div style="flex: 1 1 460px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px">
-<div class="gal" data-alt="Pedal patch matrix" data-photos="videos/fuzz.mp4, photos/fuzz1.jpg, photos/fuzz2.jpg"></div>
-<h3 style="margin: 0 0 4px; font-weight: 400; font-size: 36px; color: #ffc266; letter-spacing: 1px">FUZZ FACE WITH BIAS CONTROL</h3>
-<p style="margin: 0 0 8px; color: #cc7a1c; font-size: 22px; letter-spacing: 1px">FUZZ / PEDAL / ANALOG FX</p>
-<p style="margin: 0; font-size: 24px">A classic Fuzz Face with an adjustable bias control. Tune how it breaks up.</p>
-</div>
-<div style="flex: 1 1 460px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px">
-<div class="gal" data-alt="Oneal OD200 rack delay" data-photos="photos/tape.jpg"></div>
-<h3 style="margin: 0 0 4px; font-weight: 400; font-size: 36px; color: #ffc266; letter-spacing: 1px">CASSETTE PLAYER MOD</h3>
-<p style="margin: 0 0 8px; color: #cc7a1c; font-size: 22px; letter-spacing: 1px">TAPE / MOD / SOUND DESIGN</p>
-<p style="margin: 0; font-size: 24px">A modded cassette player with speed control.</p>
-</div>
-</div>
-</section>
-
-<!-- 04 MUSIC (player) -->
+<!-- 03 MUSIC (player) -->
 <section id="music" style="padding: 72px 0 24px">
 <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid #6b4210; padding-bottom: 8px; margin-bottom: 12px">
-<span style="font-size: 28px; color: #cc7a1c">[ 04 ]</span>
+<span style="font-size: 28px; color: #a8661a">[ 03 ]</span>
 <h2 style="margin: 0; font-weight: 400; font-size: 56px; letter-spacing: 2px; line-height: 1">MUSIC</h2>
 </div>
-<p style="margin: 0 0 28px; color: #cc7a1c; font-size: 26px">&gt; ls ./portfolio  // selected tracks</p>
+<p style="margin: 0 0 28px; color: #a8661a; font-size: 26px">&gt; ls ./portfolio  // selected tracks</p>
 
 <div class="player" id="player">
 <div class="np">
@@ -283,26 +265,111 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
 <ol id="tracklist" class="tracks"></ol>
 <audio id="audio" preload="metadata"></audio>
 </div>
-<noscript><p style="margin: 16px 0 0; color: #cc7a1c">JavaScript is needed for the player.</p></noscript>
-<p style="margin: 20px 0 0; color: #cc7a1c; font-size: 24px">&gt; full discography: <a class="row-a" href="https://ognomo.bandcamp.com/" style="color: #ff9a1f">[BANDCAMP]</a></p>
+<noscript><p style="margin: 16px 0 0; color: #a8661a">JavaScript is needed for the player.</p></noscript>
+<p style="margin: 20px 0 0; color: #a8661a; font-size: 24px">&gt; full discography: <a class="row-a" href="https://ognomo.bandcamp.com/" style="color: #ff9a1f">[BANDCAMP]</a></p>
 </section>
 
-<!-- 05 CONTACT / RATES -->
+<!-- 04 DIY -->
+<section id="diy" style="padding: 72px 0 24px">
+<div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid #6b4210; padding-bottom: 8px; margin-bottom: 12px">
+<span style="font-size: 28px; color: #a8661a">[ 04 ]</span>
+<h2 style="margin: 0; font-weight: 400; font-size: 56px; letter-spacing: 2px; line-height: 1">DIY PROJECTS</h2>
+</div>
+<p style="margin: 0 0 28px; color: #a8661a; font-size: 26px">&gt; ls ./bench  // pedals, preamps and hand-built oddities</p>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px">
+<div style="flex: 1 1 460px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px">
+<div class="gal" data-alt="NOISEGUITAR" data-photos="photos/ng0.jpg, https://youtube.com/shorts/1KkAngEWz9Y, photos/ng1.jpg, photos/ng2.jpg, photos/ng3.jpg, photos/ng4.jpg, photos/ng5.jpg"></div>
+<h3 style="margin: 0 0 4px; font-weight: 400; font-size: 36px; color: #ffc266; letter-spacing: 1px">NOISE GUITAR</h3>
+<p style="margin: 0 0 8px; color: #a8661a; font-size: 22px; letter-spacing: 1px">GUITAR / PIEZO / CUSTOM INSTRUMENT</p>
+<p style="margin: 0; font-size: 24px">A guitar-piezobox hybrid equipped with hand-built preamp and an aditional output.</p>
+</div>
+<div style="flex: 1 1 460px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px">
+<div class="gal" data-alt="NOISE BOX #1" data-photos="photos/pb0.jpg, photos/pb1.jpg, photos/pb2.jpg, photos/pb3.jpg, photos/pb4.jpg, photos/pb5.jpg"></div>
+<h3 style="margin: 0 0 4px; font-weight: 400; font-size: 36px; color: #ffc266; letter-spacing: 1px">PIEZO NOISE BOX #1</h3>
+<p style="margin: 0 0 8px; color: #a8661a; font-size: 22px; letter-spacing: 1px">PIEZO / NOISE / SFX </p>
+<p style="margin: 0; font-size: 24px">A piezo box with built-in high-pass filter and range selection switch.</p>
+</div>
+<div style="flex: 1 1 460px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px">
+<div class="gal" data-alt="FUZZ FACE" data-photos="https://youtube.com/shorts/1xqVRgv-1HU, photos/fuzz1.jpg, photos/fuzz2.jpg"></div>
+<h3 style="margin: 0 0 4px; font-weight: 400; font-size: 36px; color: #ffc266; letter-spacing: 1px">FUZZ FACE WITH BIAS CONTROL</h3>
+<p style="margin: 0 0 8px; color: #a8661a; font-size: 22px; letter-spacing: 1px">FUZZ / PEDAL / ANALOG FX</p>
+<p style="margin: 0; font-size: 24px">A 2N3904 silicon Fuzz Face with an adjustable bias control to tune how it breaks up.</p>
+</div>
+<div style="flex: 1 1 460px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px">
+<div class="gal" data-alt="Oneal OD200 rack delay" data-photos="photos/tape.jpg"></div>
+<h3 style="margin: 0 0 4px; font-weight: 400; font-size: 36px; color: #ffc266; letter-spacing: 1px">CASSETTE PLAYER MOD</h3>
+<p style="margin: 0 0 8px; color: #a8661a; font-size: 22px; letter-spacing: 1px">TAPE / MOD / SOUND DESIGN</p>
+<p style="margin: 0; font-size: 24px">A modded cassette player with speed control.</p>
+</div>
+</div>
+</section>
+
+<!-- 05 PROJECTS -->
+<section id="projects" style="padding: 72px 0 24px">
+<div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid #6b4210; padding-bottom: 8px; margin-bottom: 12px">
+<span style="font-size: 28px; color: #a8661a">[ 05 ]</span>
+<h2 style="margin: 0; font-weight: 400; font-size: 56px; letter-spacing: 2px; line-height: 1">PROJECTS</h2>
+</div>
+<p style="margin: 0 0 28px; color: #a8661a; font-size: 26px">&gt; ls ./work  // games and releases I have worked on</p>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px">
+
+<div style="flex: 1 1 460px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px">
+<div class="gal" data-alt="Warlord's Penance" data-photos="covers/wlp0.png, https://www.youtube.com/watch?v=dFVEou0H01w, covers/wlp1.png, covers/wlp2.png, covers/wlp4.png "></div>
+<h3 style="margin: 0 0 4px; font-weight: 400; font-size: 36px; color: #ffc266; letter-spacing: 1px">WARLORD'S PENANCE</h3>
+<p style="margin: 0 0 8px; color: #a8661a; font-size: 22px; letter-spacing: 1px">GAME JAM / MUSIC + SFX / 2025</p>
+<p style="margin: 0 0 12px; font-size: 24px">Adaptive/layered music and sound design for the dungeon crawler Warlord’s Penance. The game won 2nd place overall and features astounding art and game design by Zizaco. I’m biased, but I highly recommend it!</p>
+<p style="margin: 0; color: #a8661a; font-size: 24px">&gt; <a class="row-a" href="https://zizaco.itch.io/wl-penance" style="color: #ff9a1f">[PLAY THE GAME]</a> &nbsp; <a class="row-a" href="https://www.youtube.com/watch?v=rNnEF2_qeXU" style="color: #ff9a1f">[SOUNDTRACK]</a></p>
+</div>
+
+<div style="flex: 1 1 460px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px">
+<div class="gal" data-alt="Strange Days" data-photos="covers/strange0.png, videos/strangedaystrailer.mp4"></div>
+<h3 style="margin: 0 0 4px; font-weight: 400; font-size: 36px; color: #ffc266; letter-spacing: 1px">STRANGE DAYS</h3>
+<p style="margin: 0 0 8px; color: #a8661a; font-size: 22px; letter-spacing: 1px">CHIPTUNE / DEMO / TBA</p>
+<p style="margin: 0 0 12px; font-size: 24px">Hardware accurate gameboy tracks and trailer tracks for story driven puzzle game Strange Days by Urigami Games.</p>
+<p style="margin: 0; color: #a8661a; font-size: 24px">&gt; <a class="row-a" href="https://store.steampowered.com/app/3714040/Strange_Days/" style="color: #ff9a1f">[PLAY THE DEMO]</a></p>
+</div>
+
+<div style="flex: 1 1 460px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px">
+<div class="gal" data-alt="PAPUS GAMES" data-photos="covers/papusgames.jpg"></div>
+<h3 style="margin: 0 0 4px; font-weight: 400; font-size: 36px; color: #ffc266; letter-spacing: 1px">PAPUS GAMES</h3>
+<p style="margin: 0 0 8px; color: #a8661a; font-size: 22px; letter-spacing: 1px">MUSIC / SFX / 2024-PRESENT</p>
+<p style="margin: 0 0 12px; font-size: 24px">Ongoing partnership with russian devs at Papus Games. Made music and sounds for various of their games including Flower Instability, Depnull, Partomania, Day 15, Brainstorm and more.</p>
+<p style="margin: 0; color: #a8661a; font-size: 24px">&gt; <a class="row-a" href="https://papus-games.itch.io/" style="color: #ff9a1f">[PAPUS GAMES' ITCH PAGE]</a></p>
+</div>
+
+<div style="flex: 1 1 460px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px">
+<div class="gal" data-alt="Ulterior Silence" data-photos="covers/ulterior.jpg"></div>
+<h3 style="margin: 0 0 4px; font-weight: 400; font-size: 36px; color: #ffc266; letter-spacing: 1px">ULTERIOR SILENCE</h3>
+<p style="margin: 0 0 8px; color: #a8661a; font-size: 22px; letter-spacing: 1px">CHIPTUNE / YM2612 / 2024-PRESENT</p>
+<p style="margin: 0 0 12px; font-size: 24px">Ulterior Silence is my personal dark ambient project, built on the Mega Drive/YM2612 sound chip and still in development. The album Echoes of Midras is set in a harsh world beyond a one-way portal, where people deemed “undesirable” for political, cultural or other reasons are cast away and left to survive. At the far end of that portal, a sprawling favela has formed, built from scraps and desperation. The story follows the Wayfarer, a scavenger struggling with his own perception of himself and with the meaning of his life and the lives of others.</p>
+<p style="margin: 0; color: #a8661a; font-size: 24px">&gt; <a class="row-a" href="https://ognomo.bandcamp.com/album/echoes-of-midras" style="color: #ff9a1f">[ADD LINK]</a></p>
+</div>
+
+</div>
+</section>
+
+<!-- 06 CONTACT / RATES -->
 <section id="contact" style="padding: 72px 0 24px">
 <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid #6b4210; padding-bottom: 8px; margin-bottom: 12px">
-<span style="font-size: 28px; color: #cc7a1c">[ 05 ]</span>
+<span style="font-size: 28px; color: #a8661a">[ 06 ]</span>
 <h2 style="margin: 0; font-weight: 400; font-size: 56px; letter-spacing: 2px; line-height: 1">CONTACT / RATES</h2>
 </div>
-<p style="margin: 0 0 28px; color: #cc7a1c; font-size: 26px">&gt; open channel  // let's work together</p>
+<p style="margin: 0 0 28px; color: #a8661a; font-size: 26px">&gt; open channel  // let's work together</p>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px">
 <div style="flex: 1 1 460px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px 24px">
 <h3 style="margin: 0 0 12px; font-weight: 400; font-size: 36px; color: #ffc266; letter-spacing: 1px">RATES</h3>
-<div style="display: flex; align-items: baseline; gap: 12px; padding: 8px 0"><span>SFX &amp; SOUND DESIGN</span><span aria-hidden="true" style="flex: 1 1 auto; min-width: 24px; border-bottom: 2px dotted #6b4210"></span><span style="color: #ffc266">[RATE]</span></div>
-<div style="display: flex; align-items: baseline; gap: 12px; padding: 8px 0"><span>CHIPTUNE</span><span aria-hidden="true" style="flex: 1 1 auto; min-width: 24px; border-bottom: 2px dotted #6b4210"></span><span style="color: #ffc266">[RATE]</span></div>
-<div style="display: flex; align-items: baseline; gap: 12px; padding: 8px 0"><span>MUSIC</span><span aria-hidden="true" style="flex: 1 1 auto; min-width: 24px; border-bottom: 2px dotted #6b4210"></span><span style="color: #ffc266">[RATE]</span></div>
-<div style="display: flex; align-items: baseline; gap: 12px; padding: 8px 0"><span>CUSTOM PACKS</span><span aria-hidden="true" style="flex: 1 1 auto; min-width: 24px; border-bottom: 2px dotted #6b4210"></span><span style="color: #ffc266">[RATE]</span></div>
-<p style="margin: 16px 0 0; color: #cc7a1c; font-size: 22px">TURNAROUND [DAYS] / REVISIONS [N] / PAYMENT [METHODS]</p>
+<div style="display: flex; align-items: baseline; gap: 12px; padding: 8px 0"><span>SFX &amp; SOUND DESIGN</span><span aria-hidden="true" style="flex: 1 1 auto; min-width: 24px; border-bottom: 2px dotted #6b4210"></span><span style="color: #ffc266">[$10/sound]</span></div>
+<p style="margin: 2px 0 8px; color: #cc7a1c; font-size: 20px; line-height: 1">For simple, short sounds, or $15 for sounds with a few variations. More complex SFX are quoted separately.</p>
+<div style="display: flex; align-items: baseline; gap: 12px; padding: 8px 0"><span>CHIPTUNE</span><span aria-hidden="true" style="flex: 1 1 auto; min-width: 24px; border-bottom: 2px dotted #6b4210"></span><span style="color: #ffc266">[$50/track]</span></div>
+<p style="margin: 2px 0 8px; color: #cc7a1c; font-size: 20px; line-height: 1">For systems with 4 to 5 channels, such as the NES and Game Boy. Looping tracks of about 1 to 1.5 minutes. Other systems may fall into the "Music" category.</p>
+<div style="display: flex; align-items: baseline; gap: 12px; padding: 8px 0"><span>MUSIC</span><span aria-hidden="true" style="flex: 1 1 auto; min-width: 24px; border-bottom: 2px dotted #6b4210"></span><span style="color: #ffc266">[$100/minute]</span></div>
+<p style="margin: 2px 0 8px; color: #cc7a1c; font-size: 20px; line-height: 1">General music production in styles inspired by retro systems and more complex sound chips, such as those in the Mega Drive and SNES.</p>
+<div style="display: flex; align-items: baseline; gap: 12px; padding: 8px 0"><span>CUSTOM PACKS</span><span aria-hidden="true" style="flex: 1 1 auto; min-width: 24px; border-bottom: 2px dotted #6b4210"></span><span style="color: #ffc266">[$???]</span></div>
+<p style="margin: 2px 0 8px; color: #cc7a1c; font-size: 20px; line-height: 1">Reach out and we’ll work out a deal for a package of sounds. The values above are only guidelines, and I’m always open to negotiating based on your project and budget.</p>
+<p style="margin: 16px 0 0; color: #ffc266; font-size: 22px">TURNAROUND [7 to 15 DAYS] / [1 MAJOR REVISION] / PAYMENT [PAYPAL]</p>
 </div>
 
 <div style="flex: 1 1 360px; min-width: 0; box-sizing: border-box; border: 2px solid #6b4210; background: #100803; padding: 20px 24px">
@@ -318,9 +385,9 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
 </section>
 
 <!-- FOOTER -->
-<footer style="margin-top: 56px; padding-top: 16px; border-top: 2px solid #6b4210; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: #cc7a1c; font-size: 22px; letter-spacing: 1px">
+<footer style="margin-top: 56px; padding-top: 16px; border-top: 2px solid #6b4210; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: #a8661a; font-size: 22px; letter-spacing: 1px">
 <span>AMBERCAP AUDIO // BY CHRIS LUCAS // (C) 2026</span>
-<span>END OF TRANSMISSION<span aria-hidden="true" style="display: inline-block; width: 12px; height: 20px; background: #cc7a1c; margin-left: 8px; vertical-align: -3px; animation: amberblink 1s steps(1) infinite"></span></span>
+<span>END OF TRANSMISSION<span aria-hidden="true" style="display: inline-block; width: 12px; height: 20px; background: #a8661a; margin-left: 8px; vertical-align: -3px; animation: amberblink 1s steps(1) infinite"></span></span>
 </footer>
 
 </div>
@@ -330,27 +397,13 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
 (function () {
   "use strict";
 
-  /* ------------------------------------------------------------------
-     YOUR TRACKS. Add, remove or reorder entries here and the player
-     and the list update by themselves.
-
-     title    name shown in the player
-     tags     genre or short description (optional)
-     audio    path to your audio file (mp3 or ogg recommended)
-     cover    path to the image shown with the track (optional)
-     youtube  a YouTube link instead of "audio". The video plays in
-              place of the cover image.
-
-     YouTube example (use instead of "audio"):
-     { title: "My Song", tags: "ambient", youtube: "https://www.youtube.com/watch?v=VIDEO_ID" },
-     ------------------------------------------------------------------ */
   var TRACKS = [
-    { title: "DUNGEON DANCE", tags: "[DUNGEON SYNTH | CASSETTE]", audio: "audio/dgsynth.ogg", cover: "covers/dgsynth.png" },
-    { title: "QUIESCENCE", tags: "[CHIPTUNE | YM2612]", audio: "audio/untitled.ogg", cover: "covers/quiesce.png" },
-    { title: "UNDER FALSE COLORS", tags: "[CHIPTUNE HYBRID | TRACKER]", audio: "audio/ballheim.ogg", cover: "covers/ball.png" },
-    { title: "THE POSSESSION", tags: "[CHIPTUNE | GAMEBOY]", audio: "audio/possession.ogg", cover: "covers/poss.png" },
-    { title: "BINARY SHIFT", tags: "[PSX | DnB]", audio: "audio/binary.ogg", cover: "covers/dep2.png" },
-    { title: "BRAINSTORM", tags: "[HORROR | WEIRD]", audio: "audio/brain.ogg", cover: "covers/brain.png" }
+    { title: "DUNGEON DANCE", tags: "[DUNGEON SYNTH / CASSETTE]", audio: "audio/dgsynth.ogg", cover: "covers/dgsynth.png" },
+    { title: "QUIESCENCE", tags: "[CHIPTUNE / YM2612]", audio: "audio/untitled.ogg", cover: "covers/quiesce.png" },
+    { title: "UNDER FALSE COLORS", tags: "[CHIPTUNE HYBRID / TRACKER]", audio: "audio/ballheim.ogg", cover: "covers/ball.png" },
+    { title: "THE POSSESSION", tags: "[CHIPTUNE / GAMEBOY]", audio: "audio/possession.ogg", cover: "covers/poss.png" },
+    { title: "BINARY SHIFT", tags: "[PSX / DnB]", audio: "audio/binary.ogg", cover: "covers/dep2.png" },
+    { title: "BRAINSTORM", tags: "[HORROR / WEIRD]", audio: "audio/brain.ogg", cover: "covers/brain.png" }
   ];
 
   var $ = function (id) { return document.getElementById(id); };
@@ -548,6 +601,67 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
     return ph;
   }
 
+  function isVideoFile(url) {
+    return /\.(mp4|webm|m4v|mov|ogv)(\?.*)?(#.*)?$/i.test(String(url));
+  }
+
+  function youtubeId(url) {
+    var m = String(url).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/))([A-Za-z0-9_-]{11})/);
+    return m ? m[1] : null;
+  }
+
+  
+  var lb = null, lbImg, lbCap, lbPrev, lbNext, lbList = [], lbAlt = "", lbI = 0, lbReturn = null;
+  function lbBuild() {
+    lb = document.createElement("div");
+    lb.className = "lb"; lb.hidden = true;
+    lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true"); lb.setAttribute("aria-label", "Enlarged photo");
+    lbImg = document.createElement("img"); lbImg.alt = "";
+    lbCap = document.createElement("div"); lbCap.className = "lb-cap";
+    var close = document.createElement("button");
+    close.type = "button"; close.className = "lb-btn lb-close"; close.setAttribute("aria-label", "Close"); close.textContent = "X";
+    lbPrev = document.createElement("button");
+    lbPrev.type = "button"; lbPrev.className = "lb-btn lb-prev"; lbPrev.setAttribute("aria-label", "Previous photo"); lbPrev.textContent = "<";
+    lbNext = document.createElement("button");
+    lbNext.type = "button"; lbNext.className = "lb-btn lb-next"; lbNext.setAttribute("aria-label", "Next photo"); lbNext.textContent = ">";
+    lb.appendChild(lbImg); lb.appendChild(close); lb.appendChild(lbPrev); lb.appendChild(lbNext); lb.appendChild(lbCap);
+    document.body.appendChild(lb);
+    close.addEventListener("click", lbClose);
+    lbImg.addEventListener("click", lbClose);
+    lb.addEventListener("click", function (e) { if (e.target === lb) { lbClose(); } });
+    lbPrev.addEventListener("click", function () { lbShow(lbI - 1); });
+    lbNext.addEventListener("click", function () { lbShow(lbI + 1); });
+    document.addEventListener("keydown", function (e) {
+      if (lb.hidden) { return; }
+      if (e.key === "Escape") { lbClose(); }
+      else if (e.key === "ArrowLeft") { lbShow(lbI - 1); }
+      else if (e.key === "ArrowRight") { lbShow(lbI + 1); }
+      else if (e.key === "Tab") { e.preventDefault(); }   
+    });
+  }
+  function lbShow(i) {
+    var n = lbList.length;
+    lbI = (i + n) % n;
+    lbImg.src = lbList[lbI];
+    lbImg.alt = lbAlt;
+    lbCap.textContent = lbAlt + (n > 1 ? "  " + (lbI + 1) + "/" + n : "");
+    lbPrev.hidden = lbNext.hidden = n < 2;
+  }
+  function lbOpen(list, i, alt) {
+    if (!lb) { lbBuild(); }
+    lbList = list; lbAlt = alt; lbReturn = document.activeElement;
+    lbShow(i);
+    lb.hidden = false;
+    document.body.style.overflow = "hidden";
+    lb.querySelector(".lb-close").focus();
+  }
+  function lbClose() {
+    lb.hidden = true;
+    lbImg.removeAttribute("src");
+    document.body.style.overflow = "";
+    if (lbReturn && lbReturn.focus) { lbReturn.focus(); }
+  }
+
   Array.prototype.forEach.call(document.querySelectorAll(".gal"), function (gal) {
     var alt = gal.getAttribute("data-alt") || "Project photo";
     var photos = (gal.getAttribute("data-photos") || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
@@ -560,29 +674,87 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
     track.className = "gal-track";
     if (n > 1) {
       track.tabIndex = 0;
-      track.setAttribute("aria-label", alt + ", photo carousel");
+      track.setAttribute("aria-label", alt + ", carousel");
     }
+
+    var videos = []; 
+
     photos.forEach(function (src, i) {
       var li = document.createElement("li");
-      var img = document.createElement("img");
-      img.src = src;
-      img.alt = alt + (n > 1 ? " (photo " + (i + 1) + " of " + n + ")" : "");
-      img.loading = "lazy";
-      img.decoding = "async";
-      img.addEventListener("error", function () {
-        img.remove();
-        li.appendChild(placeholder("[ PHOTO NOT FOUND ]"));
-      });
-      li.appendChild(img);
+      var yt = youtubeId(src);
+
+      if (yt) {
+        
+        var btn = document.createElement("button");
+        function facade() {
+          li.innerHTML = "";
+          btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "gal-yt";
+          btn.setAttribute("aria-label", "Play video: " + alt);
+          var th = document.createElement("img");
+          th.src = "https://i.ytimg.com/vi/" + yt + "/hqdefault.jpg";
+          th.alt = "";
+          th.loading = "lazy";
+          th.addEventListener("error", function () { th.remove(); });
+          var pl = document.createElement("span");
+          pl.className = "play";
+          pl.setAttribute("aria-hidden", "true");
+          pl.textContent = ">";
+          btn.appendChild(th); btn.appendChild(pl);
+          btn.addEventListener("click", function () {
+            li.innerHTML = "";
+            var f = document.createElement("iframe");
+            f.src = "https://www.youtube-nocookie.com/embed/" + yt + "?autoplay=1&rel=0";
+            f.title = alt + " (video)";
+            f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+            f.referrerPolicy = "strict-origin-when-cross-origin";
+            f.allowFullscreen = true;
+            li.appendChild(f);
+          });
+          li.appendChild(btn);
+        }
+        facade();
+        videos.push({ li: li, stop: function () { if (li.querySelector("iframe")) { facade(); } } });
+      } else if (isVideoFile(src)) {
+        
+        var vid = document.createElement("video");
+        vid.controls = true;
+        vid.preload = "metadata";
+        vid.playsInline = true;
+        vid.setAttribute("aria-label", alt + " (video " + (i + 1) + " of " + n + ")");
+        vid.src = src + (src.indexOf("#") < 0 ? "#t=0.001" : "");
+        vid.addEventListener("error", function () {
+          vid.remove();
+          li.appendChild(placeholder("[ VIDEO UNAVAILABLE ]"));
+        });
+        li.appendChild(vid);
+        videos.push({ li: li, stop: function () { vid.pause(); } });
+      } else {
+        var img = document.createElement("img");
+        img.src = src;
+        img.alt = alt + (n > 1 ? " (item " + (i + 1) + " of " + n + ")" : "");
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.addEventListener("error", function () {
+          img.remove();
+          li.appendChild(placeholder("[ PHOTO NOT FOUND ]"));
+        });
+        li.appendChild(img);
+        img.addEventListener("click", function () {
+          var list = photos.filter(function (p) { return !youtubeId(p) && !isVideoFile(p); });
+          lbOpen(list, list.indexOf(src), alt);
+        });
+      }
       track.appendChild(li);
     });
     gal.appendChild(track);
     if (n < 2) { return; }
 
     var prev = document.createElement("button");
-    prev.type = "button"; prev.className = "gal-btn prev"; prev.setAttribute("aria-label", "Previous photo"); prev.textContent = "<";
+    prev.type = "button"; prev.className = "gal-btn prev"; prev.setAttribute("aria-label", "Previous item"); prev.textContent = "<";
     var next = document.createElement("button");
-    next.type = "button"; next.className = "gal-btn next"; next.setAttribute("aria-label", "Next photo"); next.textContent = ">";
+    next.type = "button"; next.className = "gal-btn next"; next.setAttribute("aria-label", "Next item"); next.textContent = ">";
     var count = document.createElement("span");
     count.className = "gal-count"; count.setAttribute("aria-hidden", "true"); count.textContent = "1/" + n;
     gal.appendChild(prev); gal.appendChild(next); gal.appendChild(count);
@@ -595,11 +767,19 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
       i = (i + n) % n;
       track.scrollTo({ left: i * track.clientWidth, behavior: reduce ? "auto" : "smooth" });
     }
-    track.addEventListener("scroll", function () { count.textContent = (index() + 1) + "/" + n; });
+    track.addEventListener("scroll", function () {
+      var k = index();
+      count.textContent = (k + 1) + "/" + n;
+      
+      videos.forEach(function (v) {
+        if (v.li !== track.children[k]) { v.stop(); }
+      });
+    });
     prev.addEventListener("click", function () { go(index() - 1); });
     next.addEventListener("click", function () { go(index() + 1); });
   });
 })();
+//mãe te amo
 </script>
 </body>
 </html>
