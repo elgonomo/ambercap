@@ -57,8 +57,27 @@ h2{color:#ff9a1f}
 .feat-track{display:flex;margin:0;padding:0;list-style:none;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .feat-track::-webkit-scrollbar{display:none}
 .feat-slide{flex:0 0 100%;box-sizing:border-box;padding:24px;scroll-snap-align:start}
-.feat-btn{width:36px;height:30px;padding:0;border:2px solid #ff9a1f;background:transparent;color:#ff9a1f;font:inherit;font-size:24px;line-height:1;text-shadow:inherit;cursor:pointer}
+.feat-btn{width:36px;height:30px;padding:0;border:2px solid #ff9a1f;background:transparent;color:#ff9a1f;font-size:24px;line-height:1;cursor:pointer}
 .feat-btn:hover{background:#ff9a1f;color:#0a0603;text-shadow:none}
+
+/* Latest posts side tab */
+#lpTab,#lpPanel,#lpClose{font-family:'VT323',monospace;text-shadow:0 0 6px rgba(255,154,31,.45)}
+#lpPanel{color:#e08a20;font-size:24px;line-height:1.25}
+#lpTab{position:fixed;right:0;top:50%;z-index:45;margin-top:-90px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:38px;height:180px;padding:0;border:2px solid #ff9a1f;border-right:none;background:#0a0603;color:#ff9a1f;font-size:22px;letter-spacing:2px;text-shadow:inherit;cursor:pointer;writing-mode:vertical-rl;transform:rotate(180deg)}
+#lpTab:hover,#lpTab[aria-expanded=true]{background:#ff9a1f;color:#0a0603;text-shadow:none}
+#lpTab.has-new::after{content:"";position:absolute;left:6px;top:6px;width:10px;height:10px;background:#ffc266;animation:amberblink 1s steps(1) infinite}
+#lpPanel{position:fixed;right:0;top:0;bottom:0;z-index:46;box-sizing:border-box;width:min(340px,calc(100vw - 48px));padding:20px;overflow-y:auto;background:#0a0603;border-left:2px solid #ff9a1f;transform:translateX(105%);transition:transform .2s;visibility:hidden}
+#lpPanel.open{transform:none;visibility:visible}
+#lpPanel h2{margin:0 0 14px;font-weight:400;font-size:32px;letter-spacing:2px;line-height:1;color:#ffc266}
+#lpClose{position:absolute;top:10px;right:10px;width:36px;height:36px;padding:0;border:2px solid #ff9a1f;background:transparent;color:#ff9a1f;font-size:24px;line-height:1;cursor:pointer}
+#lpClose:hover{background:#ff9a1f;color:#0a0603;text-shadow:none}
+.lp-item{display:block;padding:10px 0;border-bottom:1px dashed #6b4210;text-decoration:none;color:#e08a20}
+.lp-item:hover .lp-t{color:#fff}
+.lp-m{display:block;color:#a8661a;font-size:19px;letter-spacing:1px}
+.lp-t{display:block;color:#ffc266;font-size:28px;line-height:1.05}
+.lp-all{display:inline-block;margin-top:14px;font-size:24px}
+@media (max-width:640px){#lpTab{top:auto;bottom:16px;right:0;margin-top:0;width:auto;height:44px;padding:0 14px;writing-mode:horizontal-tb;transform:none;font-size:22px;border-right:none}}
+@media (prefers-reduced-motion:reduce){#lpPanel{transition:none}}
 
 /* CRT overlay (fixed to the viewport) */
 .crt{position:fixed;top:0;right:0;bottom:0;left:0;pointer-events:none;z-index:50;background:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0px,rgba(0,0,0,0) 2px,rgba(0,0,0,0.26) 3px,rgba(0,0,0,0.26) 4px),radial-gradient(ellipse at center,rgba(0,0,0,0) 60%,rgba(0,0,0,0.5) 100%)}
@@ -440,15 +459,6 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
 </div>
 </section>
 
-<!-- LATEST BLOG POSTS (filled from blog/posts.json) -->
-<section id="latest" hidden style="padding: 56px 0 0">
-<div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid #6b4210; padding-bottom: 8px; margin-bottom: 12px">
-<h2 style="margin: 0; font-weight: 400; font-size: 40px; letter-spacing: 2px; line-height: 1">FROM THE BLOG</h2>
-<a class="row-a" href="blog/index.html" style="color: #ff9a1f">[ALL POSTS]</a>
-</div>
-<div id="latestList"></div>
-</section>
-
 <!-- FOOTER -->
 <footer style="margin-top: 56px; padding-top: 16px; border-top: 2px solid #6b4210; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: #a8661a; font-size: 22px; letter-spacing: 1px">
 <span>AMBERCAP AUDIO // BY CHRIS LUCAS // (C) 2026</span>
@@ -457,6 +467,15 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
 
 </div>
 </div>
+
+<!-- Latest posts side tab -->
+<button id="lpTab" type="button" hidden aria-expanded="false" aria-controls="lpPanel">LATEST POSTS</button>
+<aside id="lpPanel" aria-label="Latest blog posts" aria-hidden="true">
+<button id="lpClose" type="button" aria-label="Close">X</button>
+<h2>LATEST POSTS</h2>
+<div id="lpList"></div>
+<a class="row-a lp-all" href="blog/index.html" style="color: #ff9a1f">[ALL POSTS]</a>
+</aside>
 
 <script>
 (function () {
@@ -861,17 +880,34 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
   });
 })();
 (function () {
+  "use strict";
+  var KEY = "ambercap_blog_seen";
+  function get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function set(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
   fetch("blog/posts.json").then(function (r) { return r.json(); }).then(function (posts) {
+    if (!posts.length) { return; }
     posts.sort(function (x, y) { return x.date < y.date ? 1 : -1; });
-    var box = document.getElementById("latestList"); if (!posts.length) { return; }
-    posts.slice(0, 3).forEach(function (p) {
-      var a = document.createElement("a"); a.href = "blog/post.html?p=" + encodeURIComponent(p.slug);
-      a.style.cssText = "display:block;padding:10px 0;border-bottom:1px dashed #6b4210;text-decoration:none;color:#e08a20";
-      var m = document.createElement("span"); m.style.cssText = "display:block;color:#a8661a;font-size:20px;letter-spacing:1px"; m.textContent = p.date;
-      var t = document.createElement("span"); t.style.cssText = "display:block;color:#ffc266;font-size:32px;line-height:1.05"; t.textContent = p.title;
-      a.appendChild(m); a.appendChild(t); box.appendChild(a);
+    var tab = document.getElementById("lpTab"), panel = document.getElementById("lpPanel"), list = document.getElementById("lpList");
+    posts.slice(0, 5).forEach(function (p) {
+      var a = document.createElement("a"); a.href = "blog/post.html?p=" + encodeURIComponent(p.slug); a.className = "lp-item";
+      var m = document.createElement("span"); m.className = "lp-m"; m.textContent = p.date + (p.tags && p.tags.length ? "  //  " + p.tags.join(", ") : "");
+      var t = document.createElement("span"); t.className = "lp-t"; t.textContent = p.title;
+      a.appendChild(m); a.appendChild(t); list.appendChild(a);
     });
-    document.getElementById("latest").hidden = false;
+    var newest = posts[0].date;
+    if (get() !== newest) { tab.classList.add("has-new"); }
+    function open(v) {
+      panel.classList.toggle("open", v); tab.setAttribute("aria-expanded", v ? "true" : "false");
+      panel.setAttribute("aria-hidden", v ? "false" : "true");
+      if (v) { set(newest); tab.classList.remove("has-new"); }
+    }
+    tab.hidden = false;
+    tab.addEventListener("click", function () { open(!panel.classList.contains("open")); });
+    document.getElementById("lpClose").addEventListener("click", function () { open(false); tab.focus(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && panel.classList.contains("open")) { open(false); tab.focus(); } });
+    document.addEventListener("click", function (e) {
+      if (panel.classList.contains("open") && !panel.contains(e.target) && !tab.contains(e.target)) { open(false); }
+    });
   }).catch(function () {});
 })();
 //mãe te amo
