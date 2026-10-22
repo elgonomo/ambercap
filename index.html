@@ -138,6 +138,7 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
 <a class="nav-a" href="#music" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 30px; padding: 2px 12px; font-size: 20px; border: 2px solid #6b4210; border-bottom: none; color: #ff9a1f; text-decoration: none; letter-spacing: 1px">MUSIC</a>
 <a class="nav-a" href="#diy" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 30px; padding: 2px 12px; font-size: 20px; border: 2px solid #6b4210; border-bottom: none; color: #ff9a1f; text-decoration: none; letter-spacing: 1px">DIY</a>
 <a class="nav-a" href="#projects" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 30px; padding: 2px 12px; font-size: 20px; border: 2px solid #6b4210; border-bottom: none; color: #ff9a1f; text-decoration: none; letter-spacing: 1px">PROJECTS</a>
+<a class="nav-a" href="blog/index.html" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 30px; padding: 2px 12px; font-size: 20px; border: 2px solid #6b4210; border-bottom: none; color: #ff9a1f; text-decoration: none; letter-spacing: 1px">BLOG</a>
 <a class="nav-a" href="#contact" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 30px; padding: 2px 12px; font-size: 20px; border: 2px solid #6b4210; border-bottom: none; color: #ff9a1f; text-decoration: none; letter-spacing: 1px">CONTACT / RATES</a>
 </nav>
 </div>
@@ -437,6 +438,15 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
 <a class="btn" href="mailto:contact@ognomo.com.br?subject=Project%20inquiry" style="display: inline-flex; align-items: center; box-sizing: border-box; min-height: 44px; padding: 8px 22px; border: 2px solid #ff9a1f; color: #ff9a1f; text-decoration: none; font-size: 28px; letter-spacing: 1px">SEND A MESSAGE</a>
 </div>
 </div>
+</section>
+
+<!-- LATEST BLOG POSTS (filled from blog/posts.json) -->
+<section id="latest" hidden style="padding: 56px 0 0">
+<div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid #6b4210; padding-bottom: 8px; margin-bottom: 12px">
+<h2 style="margin: 0; font-weight: 400; font-size: 40px; letter-spacing: 2px; line-height: 1">FROM THE BLOG</h2>
+<a class="row-a" href="blog/index.html" style="color: #ff9a1f">[ALL POSTS]</a>
+</div>
+<div id="latestList"></div>
 </section>
 
 <!-- FOOTER -->
@@ -849,6 +859,20 @@ input[type=range]:focus-visible{outline:2px solid #ffc266;outline-offset:2px}
     if (e.key === "ArrowLeft") { go(idx() - 1); e.preventDefault(); }
     else if (e.key === "ArrowRight") { go(idx() + 1); e.preventDefault(); }
   });
+})();
+(function () {
+  fetch("blog/posts.json").then(function (r) { return r.json(); }).then(function (posts) {
+    posts.sort(function (x, y) { return x.date < y.date ? 1 : -1; });
+    var box = document.getElementById("latestList"); if (!posts.length) { return; }
+    posts.slice(0, 3).forEach(function (p) {
+      var a = document.createElement("a"); a.href = "blog/post.html?p=" + encodeURIComponent(p.slug);
+      a.style.cssText = "display:block;padding:10px 0;border-bottom:1px dashed #6b4210;text-decoration:none;color:#e08a20";
+      var m = document.createElement("span"); m.style.cssText = "display:block;color:#a8661a;font-size:20px;letter-spacing:1px"; m.textContent = p.date;
+      var t = document.createElement("span"); t.style.cssText = "display:block;color:#ffc266;font-size:32px;line-height:1.05"; t.textContent = p.title;
+      a.appendChild(m); a.appendChild(t); box.appendChild(a);
+    });
+    document.getElementById("latest").hidden = false;
+  }).catch(function () {});
 })();
 //mãe te amo
 </script>
