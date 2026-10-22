@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "exemplo-piezo-box",
+    "title": "Building a piezo noise box",
+    "date": "2026-10-20",
+    "tags": ["diy", "electronics"],
+    "summary": "Example post. Replace me with a real build log."
+  },
+  {
+    "slug": "exemplo-chiptune",
+    "title": "Writing for the YM2612",
+    "date": "2026-10-10",
+    "tags": ["music", "chiptune"],
+    "summary": "Example post about how I write for the Mega Drive sound chip."
+  }
+]
